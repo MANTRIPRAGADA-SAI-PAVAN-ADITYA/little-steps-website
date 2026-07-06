@@ -150,6 +150,32 @@ p.section-sub{font-size:17px;color:var(--muted);max-width:540px;margin-bottom:48
 .btn-accent{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:14px;padding:14px 28px;border-radius:40px;text-decoration:none;transition:background .2s;white-space:nowrap}
 .btn-accent:hover{background:#6A4E96}
 
+/* ── TELECOM PARTNERS ── */
+.partners-section{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.partners-label{text-align:center;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:32px}
+.partners-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px;margin:0 auto}
+.partner-card{border-radius:var(--r);border:2px solid var(--border);padding:32px 28px;display:flex;flex-direction:column;gap:16px;transition:all .2s;position:relative;overflow:hidden}
+.partner-card:hover{border-color:currentColor;box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.partner-card.airtel{--pc:#ED1C24}
+.partner-card.jio{--pc:#0F3FA6}
+.partner-card:hover{border-color:var(--pc)}
+.partner-logo{display:flex;align-items:center;gap:10px}
+.partner-logo-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;flex-shrink:0}
+.partner-card.airtel .partner-logo-icon{background:linear-gradient(135deg,#ED1C24,#c4141b)}
+.partner-card.jio .partner-logo-icon{background:linear-gradient(135deg,#0F3FA6,#072f85)}
+.partner-logo-text{font-size:17px;font-weight:800;color:var(--text)}
+.partner-logo-text span{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:1px}
+.partner-deal{background:var(--bg-alt);border-radius:var(--r-sm);padding:14px 16px}
+.partner-deal .deal-head{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px}
+.partner-deal .deal-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.partner-perks{display:flex;flex-direction:column;gap:8px}
+.partner-perk{font-size:13px;display:flex;align-items:flex-start;gap:8px;color:var(--text)}
+.partner-perk::before{content:'✓';color:var(--primary);font-weight:800;flex-shrink:0}
+.partner-badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:700;background:var(--primary-light);color:var(--primary);padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.partners-note{text-align:center;margin-top:28px;font-size:13px;color:var(--muted)}
+.partners-note strong{color:var(--text)}
+@media(max-width:600px){.partners-grid{grid-template-columns:1fr}}
+
 /* ── FOOTER ── */
 footer{background:#0F1A14;color:#fff;padding:56px 5% 32px}
 .footer-inner{max-width:1100px;margin:0 auto}
@@ -195,6 +221,7 @@ footer{background:#0F1A14;color:#fff;padding:56px 5% 32px}
       <a href="#marketplace">Marketplace</a>
       <a href="#pricing">Pricing</a>
       <a href="#providers">For Providers</a>
+      <a href="#partners">Partners</a>
     </div>
     <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="nav-cta">Open App →</a>
     <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -207,6 +234,7 @@ footer{background:#0F1A14;color:#fff;padding:56px 5% 32px}
   <a href="#marketplace" onclick="toggleMenu()">Marketplace</a>
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
   <a href="#providers" onclick="toggleMenu()">For Providers</a>
+  <a href="#partners" onclick="toggleMenu()">Partners</a>
   <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="nav-cta">Open App →</a>
 </div>
 
@@ -468,6 +496,61 @@ footer{background:#0F1A14;color:#fff;padding:56px 5% 32px}
         <a href="https://little-steps-market.vercel.app/auth" target="_blank" class="btn-accent">List your service →</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- TELECOM PARTNERS -->
+<section id="partners" class="partners-section">
+  <div class="wrap">
+    <p class="partners-label">Available with your home broadband plan</p>
+    <div class="partners-grid">
+
+      <!-- Airtel -->
+      <div class="partner-card airtel">
+        <div class="partner-badge">Coming soon</div>
+        <div class="partner-logo">
+          <div class="partner-logo-icon">A</div>
+          <div class="partner-logo-text">Airtel Xstream Fiber
+            <span>Yearly plan subscribers</span>
+          </div>
+        </div>
+        <div class="partner-deal">
+          <div class="deal-head">🎁 Little Steps Plus — included free</div>
+          <div class="deal-desc">Subscribe to any Airtel Xstream Fiber yearly broadband plan and get Little Steps Plus (₹199/mo value) at no extra cost for 12 months.</div>
+        </div>
+        <div class="partner-perks">
+          <div class="partner-perk">Activated instantly with your Airtel account</div>
+          <div class="partner-perk">Full access — all features, unlimited children</div>
+          <div class="partner-perk">Family Circle included (share with caregivers)</div>
+          <div class="partner-perk">Marketplace booking credits each month</div>
+        </div>
+      </div>
+
+      <!-- Jio -->
+      <div class="partner-card jio">
+        <div class="partner-badge">Coming soon</div>
+        <div class="partner-logo">
+          <div class="partner-logo-icon">J</div>
+          <div class="partner-logo-text">JioFiber
+            <span>Annual plan subscribers</span>
+          </div>
+        </div>
+        <div class="partner-deal">
+          <div class="deal-head">🎁 Little Steps Plus — included free</div>
+          <div class="deal-desc">Get Little Steps Plus bundled with any JioFiber annual plan. No separate subscription needed — activated through your MyJio account.</div>
+        </div>
+        <div class="partner-perks">
+          <div class="partner-perk">Single sign-on via MyJio — no new password</div>
+          <div class="partner-perk">Full access — all features, unlimited children</div>
+          <div class="partner-perk">Works across phones, tablets and smart TVs</div>
+          <div class="partner-perk">Renews automatically with your Jio plan</div>
+        </div>
+      </div>
+
+    </div>
+    <p class="partners-note">
+      <strong>Why broadband bundles?</strong> Indian families upgrade to yearly fibre plans when they have young children at home — the timing aligns perfectly with our target audience. Partnership discussions in progress.
+    </p>
   </div>
 </section>
 
