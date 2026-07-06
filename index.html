@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Little Steps — A Guided Parenting Companion</title>
+<meta name="description" content="One app for everything parenting — activities, health, routines, nutrition, family, and a marketplace, all tied to your child's exact age."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --primary: #3D7A62;
+  --primary-dark: #2A5545;
+  --primary-light: #E6F3ED;
+  --secondary: #F4894A;
+  --accent: #7B5EA7;
+  --bg: #F8F7F3;
+  --bg-alt: #EFEDE6;
+  --card: #ffffff;
+  --text: #161B18;
+  --muted: #6B7570;
+  --border: #E3E0D8;
+  --shadow: 0 4px 16px rgba(0,0,0,0.07),0 1px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.10),0 4px 16px rgba(0,0,0,0.06);
+  --r: 20px;
+  --r-sm: 14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(248,247,243,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(227,224,216,0.7);height:64px;display:flex;align-items:center;padding:0 5%}
+.nav-inner{width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-brand{font-weight:800;font-size:18px;color:var(--primary);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-brand span{font-size:12px;font-weight:700;background:rgba(244,137,74,0.15);color:var(--secondary);padding:2px 10px;border-radius:20px}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--primary)}
+.nav-cta{background:var(--primary);color:#fff;font-size:13px;font-weight:700;padding:9px 20px;border-radius:20px;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--primary-dark)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.2s}
+.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);padding:20px 5%;flex-direction:column;gap:16px;z-index:99;font-size:15px;font-weight:500}
+.mobile-menu a{color:var(--muted);text-decoration:none;padding:4px 0}
+.mobile-menu a:hover{color:var(--primary)}
+.mobile-menu .nav-cta{text-align:center;display:block}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1100px;margin:0 auto;padding:0 5%}
+section{padding:80px 0}
+h2.section-title{font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--text);line-height:1.2;margin-bottom:12px}
+p.section-sub{font-size:17px;color:var(--muted);max-width:540px;margin-bottom:48px}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 60%,#4A9A78 100%);color:#fff;padding:100px 5% 120px;position:relative;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 92%,0 100%)}
+.hero::before,.hero::after{content:'';position:absolute;border-radius:50%;pointer-events:none}
+.hero::before{width:500px;height:500px;background:rgba(255,255,255,0.04);top:-100px;right:-80px}
+.hero::after{width:300px;height:300px;background:rgba(255,255,255,0.05);bottom:-60px;left:-60px}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.9);font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px;margin-bottom:24px;backdrop-filter:blur(8px)}
+.hero h1{font-size:clamp(36px,6vw,64px);font-weight:800;line-height:1.1;margin-bottom:20px;max-width:700px}
+.hero h1 em{font-style:normal;color:rgba(255,255,255,0.7)}
+.hero-sub{font-size:18px;color:rgba(255,255,255,0.8);max-width:520px;margin-bottom:36px;line-height:1.6}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--primary);font-weight:700;font-size:15px;padding:14px 28px;border-radius:40px;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,0.15)}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.2)}
+.btn-outline{border:2px solid rgba(255,255,255,0.4);color:#fff;font-weight:700;font-size:15px;padding:14px 28px;border-radius:40px;text-decoration:none;transition:all .2s}
+.btn-outline:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.7)}
+.hero-stats{display:flex;gap:40px;margin-top:52px;flex-wrap:wrap}
+.hero-stat .val{font-size:28px;font-weight:800;color:#fff}
+.hero-stat .lbl{font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px;font-weight:500}
+
+/* ── PROBLEM ── */
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.problem-card{background:var(--card);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);border-left:4px solid var(--secondary)}
+.problem-card .icon{font-size:28px;margin-bottom:12px}
+.problem-card h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.problem-card p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ── FEATURES ── */
+.features-bg{background:var(--bg-alt)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.feature-card{background:var(--card);border-radius:var(--r);padding:28px 28px 32px;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+.feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.feature-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;opacity:.06;background:var(--primary)}
+.feat-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:18px}
+.feat-icon.green{background:var(--primary-light)}
+.feat-icon.orange{background:rgba(244,137,74,0.12)}
+.feat-icon.purple{background:rgba(123,94,167,0.12)}
+.feat-icon.blue{background:rgba(66,132,192,0.12)}
+.feat-icon.red{background:rgba(224,92,58,0.12)}
+.feat-icon.teal{background:rgba(0,150,136,0.1)}
+.feature-card h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.feature-card p{font-size:14px;color:var(--muted);line-height:1.65}
+.feature-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-top:14px;background:var(--primary-light);color:var(--primary)}
+.feature-tag.p2{background:rgba(123,94,167,0.1);color:var(--accent)}
+
+/* ── MARKETPLACE HIGHLIGHT ── */
+.market-section{background:linear-gradient(135deg,#1A3A2C 0%,var(--primary-dark) 100%);color:#fff;border-radius:28px;padding:60px;margin:0 5%;position:relative;overflow:hidden}
+.market-section::before{content:'🛍️';position:absolute;font-size:180px;right:-20px;bottom:-30px;opacity:.07;line-height:1}
+.market-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.market-left h2{font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:16px}
+.market-left p{color:rgba(255,255,255,0.75);font-size:16px;line-height:1.7;margin-bottom:28px}
+.market-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+.market-chip{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:13px;font-weight:600;padding:6px 14px;border-radius:20px}
+.market-right{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.market-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-sm);padding:18px;backdrop-filter:blur(8px)}
+.market-card .mc-icon{font-size:28px;margin-bottom:8px}
+.market-card h4{font-size:14px;font-weight:700;margin-bottom:4px}
+.market-card p{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.5}
+.market-card .mc-price{font-size:13px;font-weight:700;color:var(--secondary);margin-top:8px}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;counter-reset:step}
+.step{padding:32px 28px;position:relative;text-align:center}
+.step::before{counter-increment:step;content:counter(step);display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;font-weight:800;font-size:18px;margin:0 auto 16px}
+.step h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.step p{font-size:14px;color:var(--muted)}
+.step+.step::after{content:'→';position:absolute;left:-18px;top:38px;font-size:22px;color:var(--border)}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.price-card{background:var(--card);border-radius:var(--r);padding:32px;box-shadow:var(--shadow);border:2px solid transparent;transition:all .2s}
+.price-card.featured{border-color:var(--primary);position:relative;transform:scale(1.03)}
+.price-card.featured::before{content:'Most popular';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.price-card:hover{box-shadow:var(--shadow-lg)}
+.price-plan{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.price-amount{font-size:36px;font-weight:800;color:var(--text);margin-bottom:4px}
+.price-amount span{font-size:16px;font-weight:500;color:var(--muted)}
+.price-desc{font-size:13px;color:var(--muted);margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.price-features li{font-size:14px;display:flex;align-items:flex-start;gap:8px}
+.price-features li::before{content:'✓';color:var(--primary);font-weight:700;flex-shrink:0;margin-top:1px}
+.price-features li.no::before{content:'✕';color:var(--border)}
+.price-features li.no{color:var(--muted)}
+.btn-primary{display:block;text-align:center;background:var(--primary);color:#fff;font-weight:700;font-size:14px;padding:12px 24px;border-radius:40px;text-decoration:none;transition:background .2s}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-ghost{display:block;text-align:center;border:2px solid var(--border);color:var(--text);font-weight:700;font-size:14px;padding:12px 24px;border-radius:40px;text-decoration:none;transition:all .2s}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+
+/* ── PROVIDERS ── */
+.provider-banner{background:linear-gradient(135deg,rgba(123,94,167,0.08),rgba(123,94,167,0.03));border:1px solid rgba(123,94,167,0.15);border-radius:28px;padding:56px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.provider-banner h2{font-size:clamp(22px,3vw,32px);font-weight:800;margin-bottom:12px}
+.provider-banner p{font-size:16px;color:var(--muted);max-width:480px;line-height:1.7}
+.provider-perks{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.perk{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500}
+.perk::before{content:'✓';width:22px;height:22px;border-radius:50%;background:var(--primary-light);color:var(--primary);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.btn-accent{display:inline-block;background:var(--accent);color:#fff;font-weight:700;font-size:14px;padding:14px 28px;border-radius:40px;text-decoration:none;transition:background .2s;white-space:nowrap}
+.btn-accent:hover{background:#6A4E96}
+
+/* ── FOOTER ── */
+footer{background:#0F1A14;color:#fff;padding:56px 5% 32px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+.footer-brand{font-weight:800;font-size:20px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:220px}
+.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.35);margin-bottom:16px}
+.footer-col a{display:block;font-size:14px;color:rgba(255,255,255,0.55);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(255,255,255,0.3);flex-wrap:wrap;gap:8px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .market-grid{grid-template-columns:1fr}
+  .market-right{grid-template-columns:1fr 1fr}
+  .market-section{padding:40px 28px;margin:0 4%}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .provider-banner{grid-template-columns:1fr;text-align:center}
+  .provider-banner .btn-accent{width:100%}
+  .step+.step::after{display:none}
+  section{padding:60px 0}
+  .hero{padding:72px 5% 100px}
+  .hero-stats{gap:24px}
+}
+@media(max-width:480px){
+  .footer-top{grid-template-columns:1fr}
+  .market-right{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column}
+  .btn-white,.btn-outline{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">🌱 Little Steps <span>Beta</span></a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#marketplace">Marketplace</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#providers">For Providers</a>
+    </div>
+    <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="nav-cta">Open App →</a>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" onclick="toggleMenu()">Features</a>
+  <a href="#marketplace" onclick="toggleMenu()">Marketplace</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#providers" onclick="toggleMenu()">For Providers</a>
+  <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="nav-cta">Open App →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🇮🇳 Built for Indian families &nbsp;·&nbsp; Parenting made simple</div>
+    <h1>Everything your child needs,<br/><em>tied to their exact age.</em></h1>
+    <p class="hero-sub">Little Steps is the single home for parenting — activities, health, routines, nutrition, family coordination, and a marketplace of classes and specialists. All personalised to your child's age, every day.</p>
+    <div class="hero-btns">
+      <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="btn-white">🌱 Try the App — Free</a>
+      <a href="https://little-steps-market.vercel.app" target="_blank" class="btn-outline">🛍️ Explore Marketplace</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">25M+</div><div class="lbl">Births per year in India</div></div>
+      <div class="hero-stat"><div class="val">8–10M</div><div class="lbl">Target families</div></div>
+      <div class="hero-stat"><div class="val">10+</div><div class="lbl">Features in one app</div></div>
+      <div class="hero-stat"><div class="val">Free</div><div class="lbl">To get started</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <h2 class="section-title">Parenting is scattered. Little Steps fixes that.</h2>
+    <p class="section-sub">Today, parents piece together advice from five different places — and none of it knows their child's age.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">🔍</div>
+        <h3>Reactive searching</h3>
+        <p>Parents Google "what should my 8-month-old be doing" instead of having a guide that already knows.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📱</div>
+        <h3>Five apps, none connected</h3>
+        <p>Health records in one place, activities in another, nutrition nowhere — with no thread connecting them.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📅</div>
+        <h3>Generic advice</h3>
+        <p>Baby books and YouTube give the same tips regardless of whether your child is 3 months or 3 years old.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">👥</div>
+        <h3>Family isn't in the loop</h3>
+        <p>Grandparents, nannies and co-parents each have a different version of what's happening with the child.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features-bg">
+  <div class="wrap">
+    <h2 class="section-title">One app. Every stage.</h2>
+    <p class="section-sub">Every feature is automatically calibrated to your child's age — no manual setup, no irrelevant content.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feat-icon green">🏃</div>
+        <h3>Age-Based Activity Guide</h3>
+        <p>Daily activities across motor, cognitive, social, language and creative development — always matched to exactly how old your child is today.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon orange">📅</div>
+        <h3>Daily Routines & Streaks</h3>
+        <p>Build consistent routines for your child and track completion streaks. Morning, afternoon, bedtime — all in one tap.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon green">🏆</div>
+        <h3>Milestone Tracker</h3>
+        <p>Track developmental milestones across all domains. See what's typical for your child's age and celebrate each achievement.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon blue">📈</div>
+        <h3>Growth & Health Hub</h3>
+        <p>Log height, weight and head circumference against WHO growth charts. Manage the full vaccination schedule with reminders.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon orange">🥗</div>
+        <h3>Nutrition & Meal Logging</h3>
+        <p>Log every meal across breakfast, lunch, snacks and dinner. See your child's daily nutrition at a glance.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon red">👨‍👩‍👧</div>
+        <h3>Family Circle</h3>
+        <p>Invite grandparents, nannies and co-parents with role-based access. Everyone stays on the same page, with the right level of access.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon purple">📸</div>
+        <h3>Photo Album</h3>
+        <p>A private, age-tagged photo album built right into the app. Your child's memories in one place, forever.</p>
+        <span class="feature-tag">Phase 1</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon teal">🤖</div>
+        <h3>AI Smart Suggestions</h3>
+        <p>Personalized insights based on your child's profile, growth data and activity history — surfaced at the right moment.</p>
+        <span class="feature-tag p2">Phase 2</span>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon purple">🎓</div>
+        <h3>Lifelong Portfolio</h3>
+        <p>As your child grows, their profile extends into school age — tracking achievements, interests and skills from birth through adolescence.</p>
+        <span class="feature-tag p2">Phase 2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETPLACE -->
+<section id="marketplace" style="padding:80px 0">
+  <div class="market-section">
+    <div class="market-grid">
+      <div class="market-left">
+        <h2>Find the best for your child — locally and online.</h2>
+        <p>The Little Steps Marketplace connects parents with classes, camps, specialists and pediatricians — all vetted, age-appropriate, and bookable in seconds.</p>
+        <div class="market-chips">
+          <span class="market-chip">🎨 Creative classes</span>
+          <span class="market-chip">🤖 Coding camps</span>
+          <span class="market-chip">⚽ Sports clinics</span>
+          <span class="market-chip">👩‍⚕️ Pediatricians</span>
+          <span class="market-chip">🏫 Daycares</span>
+          <span class="market-chip">🎵 Music lessons</span>
+        </div>
+        <a href="https://little-steps-market.vercel.app" target="_blank" class="btn-white" style="display:inline-block;font-size:14px;padding:13px 26px">Browse Marketplace →</a>
+      </div>
+      <div class="market-right">
+        <div class="market-card">
+          <div class="mc-icon">🎨</div>
+          <h4>Watercolor for Kids</h4>
+          <p>Ages 4–7 · Riya's Art Studio</p>
+          <div class="mc-price">₹600 / session</div>
+        </div>
+        <div class="market-card">
+          <div class="mc-icon">🤖</div>
+          <h4>Coding Camp</h4>
+          <p>Ages 8–12 · CodeKids Academy</p>
+          <div class="mc-price">₹3,500 / camp</div>
+        </div>
+        <div class="market-card">
+          <div class="mc-icon">👩‍⚕️</div>
+          <h4>Dr. Anjali Sharma</h4>
+          <p>All ages · Sunshine Clinic</p>
+          <div class="mc-price">₹500 / consult</div>
+        </div>
+        <div class="market-card">
+          <div class="mc-icon">⚽</div>
+          <h4>Football Clinic</h4>
+          <p>Ages 6–10 · Coach Arjun</p>
+          <div class="mc-price">₹450 / session</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background:var(--bg-alt)">
+  <div class="wrap">
+    <h2 class="section-title" style="text-align:center">Up and running in 2 minutes</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 48px">No setup. No configuration. Just add your child and go.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Create your account</h3>
+        <p>Sign up free with your email. No credit card required.</p>
+      </div>
+      <div class="step">
+        <h3>Add your child</h3>
+        <p>Enter name and date of birth. The app figures out everything else.</p>
+      </div>
+      <div class="step">
+        <h3>Get your daily feed</h3>
+        <p>Age-matched activities, tips and routines appear instantly.</p>
+      </div>
+      <div class="step">
+        <h3>Track and grow</h3>
+        <p>Log milestones, health, meals and photos as you go.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <h2 class="section-title">Simple, honest pricing.</h2>
+    <p class="section-sub">Start free. Upgrade when you need more. Cancel any time.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan">Free</div>
+        <div class="price-amount">₹0 <span>/ month</span></div>
+        <div class="price-desc">Everything to get started</div>
+        <ul class="price-features">
+          <li>Age-based activity feed</li>
+          <li>Daily routines</li>
+          <li>Milestone tracker</li>
+          <li>Growth & vaccination log</li>
+          <li>1 child profile</li>
+          <li class="no">Photo album</li>
+          <li class="no">Family Circle</li>
+          <li class="no">Marketplace booking</li>
+        </ul>
+        <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="btn-ghost">Get started free</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-plan">Plus</div>
+        <div class="price-amount">₹199 <span>/ month</span></div>
+        <div class="price-desc">The full Little Steps experience</div>
+        <ul class="price-features">
+          <li>Everything in Free</li>
+          <li>Photo album (unlimited)</li>
+          <li>Nutrition & meal logging</li>
+          <li>Family Circle (3 members)</li>
+          <li>Marketplace booking</li>
+          <li>AI smart tips</li>
+          <li>Up to 3 children</li>
+        </ul>
+        <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="btn-primary">Start free trial</a>
+      </div>
+      <div class="price-card">
+        <div class="price-plan">Family</div>
+        <div class="price-amount">₹349 <span>/ month</span></div>
+        <div class="price-desc">For bigger families & caregivers</div>
+        <ul class="price-features">
+          <li>Everything in Plus</li>
+          <li>Unlimited children</li>
+          <li>Family Circle (10 members)</li>
+          <li>Priority support</li>
+          <li>Early access to new features</li>
+        </ul>
+        <a href="https://little-steps-app-pi.vercel.app" target="_blank" class="btn-ghost">Get Family plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVIDERS -->
+<section id="providers" style="background:var(--bg-alt)">
+  <div class="wrap">
+    <div class="provider-banner">
+      <div>
+        <h2>Are you a tutor, coach, or specialist?</h2>
+        <p>List your classes, camps, daycare or pediatric services on the Little Steps Marketplace — and reach thousands of parents actively looking for exactly what you offer.</p>
+        <div class="provider-perks">
+          <div class="perk">Free to list — no upfront cost</div>
+          <div class="perk">Bookings managed in one dashboard</div>
+          <div class="perk">Confirm or decline requests at your own pace</div>
+          <div class="perk">10–15% commission only on completed bookings</div>
+        </div>
+      </div>
+      <div>
+        <a href="https://little-steps-market.vercel.app/auth" target="_blank" class="btn-accent">List your service →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">🌱 Little Steps</div>
+        <p class="footer-tagline">A guided parenting companion — from birth to beyond school age.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="https://little-steps-app-pi.vercel.app" target="_blank">Parenting App</a>
+        <a href="https://little-steps-market.vercel.app" target="_blank">Marketplace</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#features">Features</a>
+      </div>
+      <div class="footer-col">
+        <h4>For Providers</h4>
+        <a href="https://little-steps-market.vercel.app/auth" target="_blank">List a service</a>
+        <a href="https://little-steps-market.vercel.app/provider" target="_blank">Provider dashboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="https://github.com/MANTRIPRAGADA-SAI-PAVAN-ADITYA/little-steps-docs" target="_blank">Docs & Blueprint</a>
+        <a href="mailto:hello@littlesteps.app">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Little Steps. All rights reserved.</span>
+      <span>Made with ❤️ for Indian families</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.style.display=m.style.display==='flex'?'none':'flex';
+}
+// close mobile menu on outside click
+document.addEventListener('click',function(e){
+  var menu=document.getElementById('mobileMenu');
+  var hamburger=document.querySelector('.hamburger');
+  if(menu.style.display==='flex'&&!menu.contains(e.target)&&!hamburger.contains(e.target)){
+    menu.style.display='none';
+  }
+});
+// smooth active nav highlight on scroll
+var sections=document.querySelectorAll('section[id]');
+var navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',function(){
+  var pos=window.scrollY+80;
+  sections.forEach(function(s){
+    if(pos>=s.offsetTop&&pos<s.offsetTop+s.offsetHeight){
+      navLinks.forEach(function(a){
+        a.style.color=a.getAttribute('href')==='#'+s.id?'var(--primary)':'';
+      });
+    }
+  });
+},{passive:true});
+</script>
+</body>
+</html>
